@@ -23,6 +23,8 @@ class App extends React.Component {
           >
             Learn React
           </a>
+          <a href="#" className="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+          <a href="#" className="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Link</a>
         </header>
       </div>
     );
