@@ -2,12 +2,11 @@ import React from 'react';
 import {
   Responsive
 } from "semantic-ui-react";
+import NavBarDesktop from './NavBarDesktop';
 
 export default class NavBar extends React.Component{
 
-  state = {
-    visible: false
-  };
+  state = {visible: false};
 
   handlePusher = () => {
     const { visible } = this.state;
@@ -17,7 +16,8 @@ export default class NavBar extends React.Component{
 
   handleToggle = () => this.setState({ visible: !this.state.visible });
 
-  render() {
+  render () {
+
     const { children, leftItems, rightItems } = this.props;
     const { visible } = this.state;
 
@@ -28,7 +28,8 @@ export default class NavBar extends React.Component{
 
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-      HOla
+        <NavBarDesktop/>
+        {children}
         </Responsive>
       </div>
     );

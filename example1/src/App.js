@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Comment from './comments/Comment';
 import Login from './login/Login';
 import NavBar from './pageComponents/NavBar';
 import faker from 'faker';
-import firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { Container, Header, Divider } from 'semantic-ui-react'
 
 class App extends React.Component {
 
@@ -18,21 +19,29 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="ui minimal comments container">
-        <NavBar/>
-        <Login/>
-        <h3 className="ui dividing header">Comments</h3>
-        <Comment author={faker.internet.userName()}/>
-        <Comment author={faker.internet.userName()}/>
-        <Comment author={faker.internet.userName()}/>
-        <form className="ui reply form">
-          <div className="field">
-            <textarea></textarea>
-          </div>
-          <div className="ui blue labeled submit icon button">
-            <i className="icon edit"></i> Add Reply
-          </div>
-        </form>
+      <div>
+        <NavBar>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Divider horizontal><Header as='h2'>Tortillerias Web</Header></Divider>
+        <div className="ui minimal comments container">
+          <Login/>
+          <h3 className="ui dividing header">Comments</h3>
+          <Comment author={faker.internet.userName()}/>
+          <Comment author={faker.internet.userName()}/>
+          <Comment author={faker.internet.userName()}/>
+          <form className="ui reply form">
+            <div className="field">
+              <textarea></textarea>
+            </div>
+            <div className="ui blue labeled submit icon button">
+              <i className="icon edit"></i> Add Reply
+            </div>
+          </form>
+        </div>
+        </NavBar>
       </div>
     );
   }

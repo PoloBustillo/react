@@ -1,22 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 import {FirebaseAuthProvider} from '@react-firebase/auth';
 
-
-
-console.log(process.env.REACT_APP_APIKEY);
 const firebaseConfig = {
- apiKey: "AIzaSyDScFdbM9xQSUuUkFtk1GSR-CuRdX3WgsI",
- authDomain: "tortillerias-4f254.firebaseapp.com",
- databaseURL: "https://tortillerias-4f254.firebaseio.com",
- projectId: "tortillerias-4f254",
- storageBucket: "",
- messagingSenderId: "807566598913",
- appId: "1:807566598913:web:cf61f95f59c3a09f"
+ apiKey: process.env.REACT_APP_APIKEY,
+ authDomain: process.env.REACT_APP_AUTHDOMAAIN,
+ databaseURL: process.env.REACT_APP_DB,
+ projectId: process.env.REACT_APP_PROYID,
+ messagingSenderId: process.env.REACT_APP_MSGID,
+ appId: process.env.REACT_APP_APPID
 };
 
 ReactDOM.render(
