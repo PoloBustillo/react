@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import Comment from './comments/Comment';
 import Login from './login/Login';
 import NavBar from './pageComponents/NavBar';
@@ -21,12 +22,8 @@ class App extends React.Component {
     return (
       <div>
         <NavBar>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <Divider horizontal><Header as='h2'>Tortillerias Web</Header></Divider>
         <div className="ui minimal comments container">
+          <Divider horizontal><Header as='h1'><span className="header">Leolandia</span></Header></Divider>
           <Login/>
           <h3 className="ui dividing header">Comments</h3>
           <Comment author={faker.internet.userName()}/>

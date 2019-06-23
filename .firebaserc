@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tortillerias-4f254"
+    "default": "leolandia-db79d",
+    "leolandia": "leolandia-db79d"
   }
 }

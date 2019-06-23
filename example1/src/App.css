@@ -1,0 +1,70 @@
+/* src/components/Layout/Layout.css */
+@font-face {
+  font-family: 'Sophia';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local('Sophia'),
+    url(./fonts/Sophia/Sophia/Sophia.woff2) format('woff2'),
+    url(./fonts/Sophia/Sophia/Sophia.otf) format('opentype'),
+    url(./fonts/Sophia/Sophia/Sophia.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Sophia Left';
+  src:
+    local('Sophia Left'),
+    url(./fonts/Sophia/Sophia Left/Sophia Left.woff2) format('woff2'),
+    url(./fonts/Sophia/Sophia Left/Sophia Left.otf) format('opentype'),
+    url(./fonts/Sophia/Sophia Left/Sophia Left.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Sophia Right';
+  src:
+    local('Sophia Right'),
+    url(./fonts/Sophia/Sophia Right/Sophia Right.woff2) format('woff2'),
+    url(./fonts/Sophia/Sophia Right/Sophia Right.otf) format('opentype'),
+    url(./fonts/Sophia/Sophia Right/Sophia Right.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Bonn';
+  src:
+    local('Bonn Bold'),
+    url(./fonts/Bonn/bonn_bold.ttf) format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Bonn';
+  src:
+    local('Bonn Light'),
+    url(./fonts/Bonn/bonn_light.ttf) format('truetype');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: 'Bonn';
+  src:
+    local('Bonn Regular'),
+    url(./fonts/Bonn/bonn_regular.ttf) format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Mightype';
+  src:
+    local('Mightype'),
+    url(./fonts/Mightype/Mightype Script.otf) format('opentype');
+}
+
+.container{
+  margin-top: 7em !important;
+}
+
+.header {
+  font-family: 'Mightype';
+  font-size: 70px;
+
+}
