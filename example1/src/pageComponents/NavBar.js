@@ -3,33 +3,32 @@ import {
   Responsive
 } from "semantic-ui-react";
 import NavBarDesktop from './NavBarDesktop';
+import NavBarMobile from './NavBarMobile';
 
 export default class NavBar extends React.Component{
-
-  state = {visible: false};
-
-  handlePusher = () => {
-    const { visible } = this.state;
-
-    if (visible) this.setState({ visible: false });
-  };
-
-  handleToggle = () => this.setState({ visible: !this.state.visible });
-
   render () {
 
-    const { children, leftItems, rightItems } = this.props;
-    const { visible } = this.state;
+    const leftItems = [
+      { as: "a", content: "Home", key: "home" },
+      { as: "a", content: "Users", key: "users" }
+    ];
+    const rightItems = [
+      { as: "a", content: "Login", key: "login" },
+      { as: "a", content: "Register", key: "register" }
+    ];
 
     return (
       <div>
         <Responsive {...Responsive.onlyMobile}>
-        HolaMobile
-
+        <NavBarMobile
+            leftItems={leftItems}
+            rightItems={rightItems}>
+            {this.props.children}
+        </NavBarMobile>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-        <NavBarDesktop/>
-        {children}
+        <NavBarDesktop leftItems={leftItems} rightItems={rightItems}/>
+          {this.props.children}
         </Responsive>
       </div>
     );
