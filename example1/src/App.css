@@ -62,7 +62,13 @@
 .container{
   margin-top: 7em !important;
 }
-
+.modal{
+  margin-top: -200px !important;
+  height: auto;
+}
+.inputContainer{
+  margin-bottom: 30px;
+}
 .header {
   font-family: 'Mightype';
   font-size: 70px;

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Comment from './comments/Comment';
-import Login from './login/Login';
 import NavBar from './pageComponents/NavBar';
 import faker from 'faker';
 import * as firebase from 'firebase/app';
@@ -21,10 +20,11 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <NavBar>
+        <NavBar showFunc={this.showModal}>
+
         <div className="ui minimal comments container">
           <Divider horizontal><Header as='h1'><span className="header">Leolandia</span></Header></Divider>
-          <Login/>
+
           <h3 className="ui dividing header">Comments</h3>
           <Comment author={faker.internet.userName()}/>
           <Comment author={faker.internet.userName()}/>

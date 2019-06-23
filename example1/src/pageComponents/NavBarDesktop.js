@@ -6,20 +6,22 @@ import {
 } from "semantic-ui-react";
 
 
-
 export default class NavBarDesktop extends React.Component{
 
   render(){
 
     return(
-      <Menu fixed="top" inverted>
+      <Menu fixed="top" color={"pink"} inverted>
        <Menu.Item>
          <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
        </Menu.Item>
-        {_.map(this.props.leftItems, item => <Menu.Item {...item} />)}
+       <Menu.Item  as="a" content="Home" key="home"/>
        <Menu.Menu position="right">
-         {_.map(this.props.rightItems, item => <Menu.Item {...item} />)}
+         <Menu.Item  as="a" content="Login" key="login" onClick={this.props.showModal}/>
+         <Menu.Item  as="a" content="Crea Cuenta" key="register" onClick={this.props.showModalRegister}/>
+         <Menu.Item/>
        </Menu.Menu>
+
      </Menu>
     );
   }

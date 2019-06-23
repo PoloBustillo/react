@@ -31,6 +31,7 @@ export default class NavBarMobile extends React.Component{
           vertical
           visible={visible}
           width='thin'
+          color='pink'
         >
           {_.map(this.props.leftItems, item => <Menu.Item {...item} />)}
         </Sidebar>
@@ -39,7 +40,7 @@ export default class NavBarMobile extends React.Component{
           onClick={this.handlePusher}
           style={{ minHeight: "100vh" }}
         >
-          <Menu fixed="top" inverted>
+          <Menu fixed="top" color={"pink"} inverted>
             <Menu.Item>
               <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
             </Menu.Item>
@@ -47,7 +48,8 @@ export default class NavBarMobile extends React.Component{
               <Icon name="sidebar" />
             </Menu.Item>
             <Menu.Menu position="right">
-              {_.map(this.props.rightItems, item => <Menu.Item {...item} />)}
+               <Menu.Item  as="a" content="Login" key="login" onClick={this.props.showModal}/>
+               <Menu.Item  as="a" content="Crea Cuenta" key="register" onClick={this.props.showModalRegister}/>
             </Menu.Menu>
           </Menu>
           {this.props.children}
