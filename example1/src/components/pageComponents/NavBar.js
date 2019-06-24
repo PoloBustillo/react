@@ -27,24 +27,12 @@ export default class NavBar extends React.Component{
   };
 
   render () {
-
-    const leftItems = [
-      { as: "a", content: "Home", key: "home" },
-      { as: "a", content: "Users", key: "users" }
-    ];
-    const rightItems = [
-      { as: "a", content: "Login", key: "login" },
-      { as: "a", content: "Register", key: "register" }
-    ];
-
     return (
       <div>
         <Login open={this.state.openLoginModal}/>
         <Register open={this.state.openRegisterModal}/>
         <Responsive {...Responsive.onlyMobile}>
         <NavBarMobile
-            leftItems={leftItems}
-            rightItems={rightItems}
             showModalRegister={this.showModalRegister}
             showModal={this.showModal}>
             {this.props.children}
@@ -52,13 +40,10 @@ export default class NavBar extends React.Component{
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <NavBarDesktop
-        leftItems={leftItems}
-        rightItems={rightItems}
         showModalRegister={this.showModalRegister}
         showModal={this.showModal}/>
           {this.props.children}
         </Responsive>
-
       </div>
     );
   }

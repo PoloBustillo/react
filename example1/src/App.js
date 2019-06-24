@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Comment from './comments/Comment';
 import NavBar from './pageComponents/NavBar';
+import Footer from './pageComponents/Footer';
 import faker from 'faker';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -39,6 +40,9 @@ class App extends React.Component {
           </form>
         </div>
         </NavBar>
+        <br/>
+        <br/>
+        <Footer/>
       </div>
     );
   }

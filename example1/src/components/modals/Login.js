@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import FormEmail from './FormEmail';
+import FormSocials from './FormSocials';
 import { Input, Button, Modal, Icon,
    Divider, Form, Grid, Segment } from 'semantic-ui-react'
 
@@ -26,25 +28,10 @@ export default class Login extends Component {
             <Segment placeholder>
               <Grid columns={2}>
                 <Grid.Column verticalAlign='middle'>
-                  <Form>
-                    <Form.Input icon='mail' iconPosition='left' label='Email' placeholder='email' />
-                    <Form.Input icon='lock' iconPosition='left' label='Password' type='password' />
-                    <Button content='Login' primary />
-                  </Form>
+                   <FormEmail buttonName="Acceder"/>
                 </Grid.Column>
-
-                <Grid.Column verticalAlign='middle' stretched>
-                    <Button color='facebook'>
-                       <Icon name='facebook' /> Facebook
-                   </Button>
-                   <br/>
-                   <br/>
-                    <Button color='google plus'>
-                      <Icon name='google plus' /> Google Plus
-                    </Button>
-                </Grid.Column>
+                <FormSocials/>
               </Grid>
-
               <Divider vertical>Or</Divider>
             </Segment>
 
