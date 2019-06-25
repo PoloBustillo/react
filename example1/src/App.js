@@ -4,19 +4,10 @@ import Comment from './components/comments/Comment';
 import Footer from './components/pageComponents/Footer';
 import ResponsiveContainer from './components/pageComponents/ResponsiveContainer';
 import faker from 'faker';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
 
 
 class App extends React.Component {
-
-  constructor() {
-   // Initialize Firebase
-   const db = firebase.firestore();
-   super();
-  }
-
+  
   render(){
     return (
       <div>

@@ -3,7 +3,8 @@ import FormEmail from './FormEmail';
 import FormSocials from './FormSocials';
 import {Modal, Divider, Grid, Segment, Message} from 'semantic-ui-react'
 
-export default class Login extends Component {
+
+class Login extends Component {
   state={open:false};
 
   close = () => { console.log('CLOSE'); this.setState({ open: false })}
@@ -48,3 +49,6 @@ export default class Login extends Component {
     )
   }
 }
+
+
+export default Login;

@@ -1,10 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import firebase from 'firebase/app';
+import firebase from "firebase/app";
+import "firebase/auth";
 import {FirebaseAuthProvider} from '@react-firebase/auth';
+import { Provider } from 'react-redux';
+import configureStore from './configureStore'
 
+const store = configureStore()
 const firebaseConfig = {
  apiKey: process.env.REACT_APP_APIKEY,
  authDomain: process.env.REACT_APP_AUTHDOMAAIN,
@@ -14,9 +18,11 @@ const firebaseConfig = {
  appId: process.env.REACT_APP_APPID
 };
 
-ReactDOM.render(
+render(
   <FirebaseAuthProvider firebase={firebase} {...firebaseConfig}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </FirebaseAuthProvider>
   , document.getElementById('root'));
 

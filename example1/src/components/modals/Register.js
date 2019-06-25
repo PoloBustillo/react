@@ -7,12 +7,36 @@ import 'firebase/auth';
 
 export default class Register extends Component {
 
-  state={open:false};
+  state={open:false, verificationEmailSend:false};
   close = () => this.setState({ open: false })
 
   onSubmitClick = (mail, password) => {
     const auth = firebase.auth();
     auth.createUserWithEmailAndPassword(mail, password)
+    .then((cred)=>{
+      // cred.user.sendEmailVerification().then(() => {
+      //   this.setState({verificationEmailSend:true});
+      // }).catch(this.setState({error:'sendEmail'}));
+    })
+    .catch((error)=> {console.log(error.code)});
+
+
+    auth.currentUser.getIdTokenResult(true)
+    .then((idTokenResult) => {
+       console.log(idTokenResult.claims.admin);
+       console.log(idTokenResult.claims.isAdmin);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    // auth.onAuthStateChanged(function(user) {
+    //   if (user.emailVerified) {
+    //     console.log('Email is verified');
+    //   }
+    //   else {
+    //     console.log('Email is not verified');
+    //   }
+    // });
     console.log(password);
   }
 
