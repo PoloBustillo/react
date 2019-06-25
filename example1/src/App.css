@@ -59,9 +59,6 @@
     url(./fonts/Mightype/Mightype Script.otf) format('opentype');
 }
 
-.container{
-  margin-top: 7em !important;
-}
 .modal{
   margin-top: -200px !important;
   height: auto;

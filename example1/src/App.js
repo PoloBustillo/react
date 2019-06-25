@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
-import Comment from './comments/Comment';
-import NavBar from './pageComponents/NavBar';
-import Footer from './pageComponents/Footer';
+import Comment from './components/comments/Comment';
+import Footer from './components/pageComponents/Footer';
+import ResponsiveContainer from './components/pageComponents/ResponsiveContainer';
 import faker from 'faker';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { Container, Header, Divider } from 'semantic-ui-react'
+
 
 class App extends React.Component {
 
   constructor() {
    // Initialize Firebase
-   const auth = firebase.auth();
    const db = firebase.firestore();
    super();
   }
@@ -21,27 +20,23 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <NavBar showFunc={this.showModal}>
+        <ResponsiveContainer>
+          <div className="ui minimal comments container">
 
-        <div className="ui minimal comments container">
-          <Divider horizontal><Header as='h1'><span className="header">Leolandia</span></Header></Divider>
-
-          <h3 className="ui dividing header">Comments</h3>
-          <Comment author={faker.internet.userName()}/>
-          <Comment author={faker.internet.userName()}/>
-          <Comment author={faker.internet.userName()}/>
-          <form className="ui reply form">
-            <div className="field">
-              <textarea></textarea>
-            </div>
-            <div className="ui blue labeled submit icon button">
-              <i className="icon edit"></i> Add Reply
-            </div>
-          </form>
-        </div>
-        </NavBar>
-        <br/>
-        <br/>
+            <h3 className="ui dividing header">Comments</h3>
+            <Comment author={faker.internet.userName()}/>
+            <Comment author={faker.internet.userName()}/>
+            <Comment author={faker.internet.userName()}/>
+            <form className="ui reply form">
+              <div className="field">
+                <textarea></textarea>
+              </div>
+              <div className="ui blue labeled submit icon button">
+                <i className="icon edit"></i> Add Reply
+              </div>
+            </form>
+          </div>
+        </ResponsiveContainer>
         <Footer/>
       </div>
     );

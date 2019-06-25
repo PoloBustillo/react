@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import FormEmail from './FormEmail';
 import FormSocials from './FormSocials';
-import { Input, Button, Modal, Icon,
-   Divider, Form, Grid, Segment } from 'semantic-ui-react'
+import {Modal, Divider, Grid, Segment, Message} from 'semantic-ui-react'
 
 export default class Login extends Component {
   state={open:false};
 
-  close = () => this.setState({ open: false })
+  close = () => { console.log('CLOSE'); this.setState({ open: false })}
 
   componentWillReceiveProps(nextProps) {
      // Any time props.email changes, update state.
+     console.log('PROPS');
      if (nextProps.open !== this.props.open) {
        this.setState({
          open: nextProps.open
@@ -36,7 +36,13 @@ export default class Login extends Component {
             </Segment>
 
             </Modal.Description>
+
           </Modal.Content>
+          <Modal.Actions>
+            <Message>
+              No tienes cuenta? <a href='#'>Crea tu cuenta</a>
+            </Message>
+          </Modal.Actions>
         </Modal>
       </div>
     )

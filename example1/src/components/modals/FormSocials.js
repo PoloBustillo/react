@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Button, Form, Grid, Column} from 'semantic-ui-react'
+import { Icon, Button, Grid} from 'semantic-ui-react'
 
 export default class FormSocials extends React.Component{
 

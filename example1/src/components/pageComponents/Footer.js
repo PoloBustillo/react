@@ -2,9 +2,6 @@ import React from 'react';
 import {List, Grid, Segment, Container, Header} from 'semantic-ui-react'
 
 export default class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render(){
 
