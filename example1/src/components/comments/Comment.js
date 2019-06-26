@@ -21,6 +21,12 @@ export default class Comment extends React.Component{
             <a className="reply">Reply</a>
           </div>
         </div>
+        <div class="ui small basic icon buttons">
+          <button class="ui button"><i class="file icon"></i></button>
+          <button class="ui button"><i class="save icon"></i></button>
+          <button class="ui button"><i class="upload icon"></i></button>
+          <button class="ui button"><i class="download icon"></i></button>
+        </div>
       </div>
     );
   }

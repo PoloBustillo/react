@@ -13,28 +13,41 @@ export default class Footer extends React.Component {
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='About' />
                 <List link inverted>
-                  <List.Item as='a'>Sitemap</List.Item>
-                  <List.Item as='a'>Contact Us</List.Item>
-                  <List.Item as='a'>Religious Ceremonies</List.Item>
-                  <List.Item as='a'>Gazebo Plans</List.Item>
+                  <List.Item as='a'>Mapa del sitio</List.Item>
+                  <List.Item as='a'>Contactanos</List.Item>
+                  <List.Item as='a'>Consejos</List.Item>
+                  <List.Item as='a'>Eventos</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
                 <Header inverted as='h4' content='Services' />
                 <List link inverted>
-                  <List.Item as='a'>Banana Pre-Order</List.Item>
-                  <List.Item as='a'>DNA FAQ</List.Item>
-                  <List.Item as='a'>How To Access</List.Item>
-                  <List.Item as='a'>Favorite X-Men</List.Item>
+                  <List.Item as='a'>Preguntas frecuentes</List.Item>
+                  <List.Item as='a'>Politicas</List.Item>
+                  <List.Item as='a'>Como comprar</List.Item>
+                  <List.Item as='a'>Regalos</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>
                 <Header as='h4' inverted>
-                  Footer Header
+                  Leolandia
                 </Header>
                 <p>
-                  Extra space for a call to action inside the footer that could help re-engage users.
+                  Empresa Poblana, enfocada en proveer diferente mercancia a los precios mas bajos, para brindar a nuestros clientes
+                  de una buena experiencia.
                 </p>
+                <button class="ui circular facebook icon button">
+                  <i class="facebook icon"></i>
+                </button>
+                <button class="ui circular twitter icon button">
+                  <i class="twitter icon"></i>
+                </button>
+                <button class="ui circular linkedin icon button">
+                  <i class="linkedin icon"></i>
+                </button>
+                <button class="ui circular google plus icon button">
+                  <i class="google plus icon"></i>
+                </button>
               </Grid.Column>
             </Grid.Row>
           </Grid>

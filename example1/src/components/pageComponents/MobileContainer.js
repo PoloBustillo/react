@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {setRegisterModalVisibility, setLoginModalVisibility} from '../../actions';
 import HomePageHeading from './HomePageHeading';
 import {
   Button,
@@ -17,7 +19,7 @@ const getWidth = () => {
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
 
-export default class MobileContainer extends Component {
+class MobileContainer extends Component {
   state = {}
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false })
@@ -45,11 +47,11 @@ export default class MobileContainer extends Component {
           <Menu.Item as='a'>
             Home
           </Menu.Item>
-          <Menu.Item as='a'>Work</Menu.Item>
-          <Menu.Item as='a'>Company</Menu.Item>
-          <Menu.Item as='a'>Careers</Menu.Item>
-          <Menu.Item as='a'>Log in</Menu.Item>
-          <Menu.Item as='a'>Sign Up</Menu.Item>
+          <Menu.Item as='a'>Puntos de Entrega</Menu.Item>
+          <Menu.Item as='a'>Catalogo</Menu.Item>
+          <Menu.Item as='a'>Cursos</Menu.Item>
+          <Menu.Item as='a' onClick={()=>this.props.setLoginModalVisibility(true)}>Acceder</Menu.Item>
+          <Menu.Item as='a' onClick={()=>this.props.setRegisterModalVisibility(true)}>Crear Cuenta</Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -66,13 +68,16 @@ export default class MobileContainer extends Component {
                   <Icon name='sidebar' />
                 </Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a'  inverted onClick={this.props.showModal}>
+                  <Button
+                    as='a'
+                    inverted
+                    onClick={()=>this.props.setLoginModalVisibility(true)}>
                     Iniciar
                   </Button>
                   <Button
                     inverted
                     as='a'
-                    onClick={this.props.showModalRegister}
+                    onClick={()=>this.props.setRegisterModalVisibility(true)}
                     style={{ marginLeft: '0.5em' }}>
                     Crear
                   </Button>
@@ -92,3 +97,14 @@ export default class MobileContainer extends Component {
 MobileContainer.propTypes = {
   children: PropTypes.node,
 }
+
+const mapStateToProps = (state, props) => ({
+   ...state
+})
+
+const mapDispatchToProps = {
+  setRegisterModalVisibility,
+  setLoginModalVisibility
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MobileContainer);

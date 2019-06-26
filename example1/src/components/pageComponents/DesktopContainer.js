@@ -1,5 +1,8 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {setRegisterModalVisibility, setLoginModalVisibility} from '../../actions';
 import HomePageHeading from './HomePageHeading';
 import {
   Button,
@@ -12,13 +15,11 @@ import {
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
-
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
 
-export default class DesktopContainer extends Component {
-  state = {}
-
+class DesktopContainer extends Component {
+  state={};
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
 
@@ -50,16 +51,19 @@ export default class DesktopContainer extends Component {
                 <Menu.Item as='a'>
                   Home
                 </Menu.Item>
-                <Menu.Item as='a'>Work</Menu.Item>
-                <Menu.Item as='a'>Company</Menu.Item>
-                <Menu.Item as='a'>Careers</Menu.Item>
+                <Menu.Item as='a'>Puntos de Entrega</Menu.Item>
+                <Menu.Item as='a'>Catalogo</Menu.Item>
+                <Menu.Item as='a'>Cursos</Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed} onClick={this.props.showModal}>
+                  <Button
+                    as='a'
+                    inverted={!fixed}
+                    onClick={()=>this.props.setLoginModalVisibility(true)}>
                     Iniciar Sesion
                   </Button>
                   <Button
                     as='a'
-                    onClick={this.props.showModalRegister}
+                    onClick={()=>this.props.setRegisterModalVisibility(true)}
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: '0.5em' }}>
@@ -81,3 +85,14 @@ export default class DesktopContainer extends Component {
 DesktopContainer.propTypes = {
   children: PropTypes.node,
 }
+
+const mapStateToProps = (state, props) => ({
+   ...state
+})
+
+const mapDispatchToProps = {
+  setRegisterModalVisibility,
+  setLoginModalVisibility
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DesktopContainer);

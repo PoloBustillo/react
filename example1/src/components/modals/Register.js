@@ -1,65 +1,99 @@
 import React, { Component } from 'react'
-import FormEmail from './FormEmail';
+import {connect} from 'react-redux';
+import {setRegisterModalVisibility} from '../../actions';
 import FormSocials from './FormSocials';
-import {Modal, Divider, Grid, Segment } from 'semantic-ui-react'
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import {Modal, Divider, Grid, Segment, Form, Button} from 'semantic-ui-react'
 
-export default class Register extends Component {
-
-  state={open:false, verificationEmailSend:false};
-  close = () => this.setState({ open: false })
-
-  onSubmitClick = (mail, password) => {
-    const auth = firebase.auth();
-    auth.createUserWithEmailAndPassword(mail, password)
-    .then((cred)=>{
-      // cred.user.sendEmailVerification().then(() => {
-      //   this.setState({verificationEmailSend:true});
-      // }).catch(this.setState({error:'sendEmail'}));
-    })
-    .catch((error)=> {console.log(error.code)});
+const INITIAL_STATE = {
+  username: '',
+  email: '',
+  passwordOne: '',
+  passwordTwo: '',
+  error: null,
+  verificationEmailSend: false
+};
 
 
-    auth.currentUser.getIdTokenResult(true)
-    .then((idTokenResult) => {
-       console.log(idTokenResult.claims.admin);
-       console.log(idTokenResult.claims.isAdmin);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-    // auth.onAuthStateChanged(function(user) {
-    //   if (user.emailVerified) {
-    //     console.log('Email is verified');
-    //   }
-    //   else {
-    //     console.log('Email is not verified');
-    //   }
-    // });
-    console.log(password);
+class Register extends Component {
+
+  state= {...INITIAL_STATE};
+
+  onChange = event => {
+    this.setState({[event.target.name]: event.target.value})
   }
 
-  componentWillReceiveProps(nextProps) {
-     // Any time props.email changes, update state.
-     if (nextProps.open !== this.props.open) {
-       this.setState({
-         open: nextProps.open
-       });
-     }
-   }
+  onSubmit = event => {
+    event.preventDefault();
+  }
+
 
   render() {
+    const {
+      username,
+      email,
+      passwordOne,
+      passwordTwo,
+      error,
+      verificationEmailSend
+    } = this.state;
+
+    const isInvalid = passwordOne !== passwordTwo ||
+          passwordOne === '' ||
+          email === '' ||
+          username === '';
+
     return (
       <div>
-        <Modal size={'mini'}  dimmer={'blurring'} open={this.state.open} onClose={this.close}>
+        <Modal
+          size={'mini'}
+          dimmer={'blurring'}
+          open={this.props.open}
+          onClose={()=>this.props.setRegisterModalVisibility(false)}>
           <Modal.Header>Crear cuenta nueva</Modal.Header>
           <Modal.Content>
             <Modal.Description>
             <Segment placeholder>
               <Grid columns={2}>
                 <Grid.Column verticalAlign='middle'>
-                 <FormEmail onSubmit={this.onSubmitClick} buttonName="Crear Cuenta"/>
+                  <Form onSubmit={() => this.onSubmit}>
+                    <Form.Input
+                      name='username'
+                      value={this.state.username}
+                      icon='user'
+                      onChange={this.onChange}
+                      iconPosition='left'
+                      type="text"
+                      label='Usuario'/>
+                    <Form.Input
+                      name='email'
+                      value={this.state.email}
+                      icon='mail'
+                      onChange={this.onChange}
+                      iconPosition='left'
+                      type="email"
+                      label='Email'
+                      placeholder='email'/>
+                    <Form.Input
+                      name='passwordOne'
+                      value={this.state.passwordOne}
+                      icon='lock'
+                      onChange={this.onChange}
+                      iconPosition='left'
+                      label='Password'
+                      type='password'/>
+                    <Form.Input name='passwordTwo'
+                      value={this.state.passwordTwo}
+                      icon='lock'
+                      onChange={this.onChange}
+                      iconPosition='left'
+                      label='Password'
+                      type='password'
+                      placeholder='Confirma tu password'/>
+                    <Button
+                      disabled={isInvalid}
+                      content='Crear Cuenta'
+                      primary/>
+                  </Form>
                 </Grid.Column>
                 <FormSocials/>
               </Grid>
@@ -74,3 +108,13 @@ export default class Register extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {open:state.modalsReducer.openRegister}
+}
+
+const mapDispatchToProps = {
+  setRegisterModalVisibility
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
