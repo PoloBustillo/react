@@ -13,14 +13,11 @@ export const errorCodes = {
   'auth/email-already-in-use':'Email ya fue usado para crear usuario.',
   'auth/invalid-email': 'Email no es valido.',
   'auth/operation-not-allowed': 'Email esta deshabilitado.',
-  'auth/weak-password': 'Password debe tener al menos 6 letras.'
+  'auth/weak-password': 'Password debe tener al menos 6 letras.',
+  'auth/network-request-failed': 'Por favor intentelo de nuevo, problemas de conexion.'
 };
 
 class Firebase {
-
-  doCreateUserWithEmailAndPassword =  async (email, password) =>{
-   await this.auth.createUserWithEmailAndPassword(email, password);
- }
 
  doSendEmailVerification=(cred)=>{
    cred.user.sendEmailVerification();

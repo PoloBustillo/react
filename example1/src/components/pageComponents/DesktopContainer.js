@@ -53,7 +53,7 @@ class DesktopContainer extends Component {
                 <Menu.Item as='a'>Puntos de Entrega</Menu.Item>
                 <Menu.Item as='a'>Catalogo</Menu.Item>
                 <Menu.Item as='a'>Cursos</Menu.Item>
-                <Menu.Item position='right'>
+                <Menu.Item hidden={this.props.isLogged} position='right'>
                   <Button
                     as='a'
                     inverted={!fixed}
@@ -67,6 +67,13 @@ class DesktopContainer extends Component {
                     primary={fixed}
                     style={{ marginLeft: '0.5em' }}>
                     Crear Cuenta
+                  </Button>
+                </Menu.Item>
+                <Menu.Item hidden={!this.props.isLogged} position='right'>
+                  <Button
+                    as='a'
+                    inverted={!fixed}>
+                    Salir
                   </Button>
                 </Menu.Item>
               </Container>

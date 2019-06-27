@@ -50,8 +50,8 @@ class MobileContainer extends Component {
           <Menu.Item as='a'>Puntos de Entrega</Menu.Item>
           <Menu.Item as='a'>Catalogo</Menu.Item>
           <Menu.Item as='a'>Cursos</Menu.Item>
-          <Menu.Item as='a' onClick={()=>this.props.setLoginModalVisibility(true)}>Acceder</Menu.Item>
-          <Menu.Item as='a' onClick={()=>this.props.setRegisterModalVisibility(true)}>Crear Cuenta</Menu.Item>
+          <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.setLoginModalVisibility(true)}>Acceder</Menu.Item>
+          <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.setRegisterModalVisibility(true)}>Crear Cuenta</Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -67,7 +67,7 @@ class MobileContainer extends Component {
                 <Menu.Item onClick={this.handleToggle}>
                   <Icon name='sidebar' />
                 </Menu.Item>
-                <Menu.Item position='right'>
+                <Menu.Item hidden={this.props.isLogged} position='right'>
                   <Button
                     as='a'
                     inverted
@@ -80,6 +80,13 @@ class MobileContainer extends Component {
                     onClick={()=>this.props.setRegisterModalVisibility(true)}
                     style={{ marginLeft: '0.5em' }}>
                     Crear
+                  </Button>
+                </Menu.Item>
+                <Menu.Item hidden={!this.props.isLogged} position='right'>
+                  <Button
+                    as='a'
+                    inverted>
+                    Salir
                   </Button>
                 </Menu.Item>
               </Menu>

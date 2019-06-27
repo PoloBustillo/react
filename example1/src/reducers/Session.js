@@ -1,19 +1,32 @@
-import {CREATE_NEW_USER_EMAIL_STARTED} from '../actions/types';
+import {
+  CREATE_NEW_USER_EMAIL_SUCCESS,
+  USER_PROFILE_SUCCESS
+} from '../actions/types';
 const INITIAL_STATE = {
   authUser: null,
   userName:'',
-  email:''
+  email:'',
+  isAdmin:false
 };
 
-const applySetAuthUser = (state, action) => ({
-  ...state,
-  authUser: action.authUser,
-});
 
 function sessionReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'AUTH_USER_SET': {
-      return applySetAuthUser(state, action);
+    case CREATE_NEW_USER_EMAIL_SUCCESS: {
+      return {
+        ...state,
+        authUser:action.payload.user,
+        userName:action.payload.displayName,
+        email:action.payload.user.email
+        }
+    }
+    case USER_PROFILE_SUCCESS: {
+      return {
+        ...state,
+        authUser:action.payload,
+        isAdmin:action.isAdmin,
+        email:action.payload.email
+        }
     }
 
     default:

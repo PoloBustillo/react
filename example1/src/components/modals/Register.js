@@ -8,8 +8,7 @@ const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
-  passwordTwo: '',
-  verificationEmailSend: false
+  passwordTwo: ''
 };
 
 
@@ -33,8 +32,7 @@ class Register extends Component {
       username,
       email,
       passwordOne,
-      passwordTwo,
-      verificationEmailSend
+      passwordTwo
     } = this.state;
 
     const isInvalid = passwordOne !== passwordTwo ||
