@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {setRegisterModalVisibility} from '../../actions';
+import {setRegisterModalVisibility,createNewUserEmail} from '../../actions';
 import FormSocials from './FormSocials';
-import {Modal, Divider, Grid, Segment, Form, Button} from 'semantic-ui-react'
+import {Modal, Divider, Grid, Segment, Form, Button, Message, Image} from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  error: null,
   verificationEmailSend: false
 };
 
@@ -22,8 +21,10 @@ class Register extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  onSubmit = event => {
+  onSubmit = (event, username, email, password) => {
     event.preventDefault();
+    this.props.createNewUserEmail(username,email,password)
+
   }
 
 
@@ -33,7 +34,6 @@ class Register extends Component {
       email,
       passwordOne,
       passwordTwo,
-      error,
       verificationEmailSend
     } = this.state;
 
@@ -45,17 +45,17 @@ class Register extends Component {
     return (
       <div>
         <Modal
-          size={'mini'}
           dimmer={'blurring'}
           open={this.props.open}
-          onClose={()=>this.props.setRegisterModalVisibility(false)}>
+          onClose={()=>this.props.setRegisterModalVisibility(false)}
+          className='modalRegister'>
           <Modal.Header>Crear cuenta nueva</Modal.Header>
-          <Modal.Content>
+          <Modal.Content scrolling>
             <Modal.Description>
             <Segment placeholder>
               <Grid columns={2}>
                 <Grid.Column verticalAlign='middle'>
-                  <Form onSubmit={() => this.onSubmit}>
+                  <Form onSubmit={(event) => this.onSubmit(event,username,email,passwordOne)}>
                     <Form.Input
                       name='username'
                       value={this.state.username}
@@ -89,18 +89,22 @@ class Register extends Component {
                       label='Password'
                       type='password'
                       placeholder='Confirma tu password'/>
+                      <Message
+                        hidden={this.props.errorMsg==''}
+                        header='Error'
+                        content={this.props.errorMsg}
+                      />
                     <Button
                       disabled={isInvalid}
+                      loading={this.props.spinner}
                       content='Crear Cuenta'
                       primary/>
                   </Form>
                 </Grid.Column>
                 <FormSocials/>
               </Grid>
-
               <Divider vertical>Or</Divider>
             </Segment>
-
             </Modal.Description>
           </Modal.Content>
         </Modal>
@@ -110,11 +114,14 @@ class Register extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {open:state.modalsReducer.openRegister}
+  return {open:state.modalsReducer.openRegister,
+          spinner:state.modalsReducer.spinner,
+          errorMsg:state.modalsReducer.errorCode}
 }
 
 const mapDispatchToProps = {
-  setRegisterModalVisibility
+  setRegisterModalVisibility,
+  createNewUserEmail
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

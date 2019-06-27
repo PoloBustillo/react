@@ -63,6 +63,10 @@
   margin-top: -200px !important;
   height: auto;
 }
+
+.modalRegister{
+  margin-top: -280px !important;
+}
 .inputContainer{
   margin-bottom: 30px;
 }

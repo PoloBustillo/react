@@ -1,5 +1,4 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+
 
 export const firebaseConfig = {
  apiKey: process.env.REACT_APP_APIKEY,
@@ -10,27 +9,21 @@ export const firebaseConfig = {
  appId: process.env.REACT_APP_APPID
 };
 
+export const errorCodes = {
+  'auth/email-already-in-use':'Email ya fue usado para crear usuario.',
+  'auth/invalid-email': 'Email no es valido.',
+  'auth/operation-not-allowed': 'Email esta deshabilitado.',
+  'auth/weak-password': 'Password debe tener al menos 6 letras.'
+};
+
 class Firebase {
-  constructor(){
-    this.auth = firebase.auth();
-  }
 
-  doCreateUserWithEmailAndPassword = (email, password) =>{
-   this.auth.createUserWithEmailAndPassword(email, password)
-   .then((cred)=>{
-     cred.user.sendEmailVerification().then(() => {
-       return {msg:'Success'};
-     },
-     (error) =>{
-       return {msg:'ErrorSendEmail'};
-     });
-   },
-   (error) =>{
-     return {msg:error.code}
-   });
+  doCreateUserWithEmailAndPassword =  async (email, password) =>{
+   await this.auth.createUserWithEmailAndPassword(email, password);
+ }
 
-
-
+ doSendEmailVerification=(cred)=>{
+   cred.user.sendEmailVerification();
  }
 
   doAdminVerification= () =>{

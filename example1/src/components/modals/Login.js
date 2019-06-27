@@ -44,7 +44,7 @@ class Login extends Component {
             <Segment placeholder>
               <Grid columns={2}>
                 <Grid.Column verticalAlign='middle'>
-                  <Form onSubmit={() => this.props.onSubmit}>
+                  <Form onSubmit={() => this.props.onSubmit(email, password)}>
                     <Form.Input
                       name='email'
                       value={this.state.email}
