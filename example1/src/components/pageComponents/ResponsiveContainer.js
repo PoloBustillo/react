@@ -8,6 +8,12 @@ import Register from '../modals/Register';
 import EmailNotice from '../modals/EmailNotice'
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import {Responsive} from 'semantic-ui-react';
+
+const getWidth = () => {
+  const isSSR = typeof window === 'undefined'
+  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
+}
 
 class ResponsiveContainer extends React.Component{
 
@@ -22,11 +28,11 @@ class ResponsiveContainer extends React.Component{
 
   render(){
     return(
-      <div className='containerHeader'>
-       <DesktopContainer {...this.props}>
+      <div>
+       <DesktopContainer {...this.props} getWidth={getWidth}>
           {this.props.children}
         </DesktopContainer>
-       <MobileContainer {...this.props}>
+       <MobileContainer {...this.props} getWidth={getWidth}>
           {this.props.children}
         </MobileContainer>
        <Login/>

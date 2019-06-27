@@ -6,7 +6,15 @@ import {
   setRegisterModalVisibility,
   loginUserEmail
 } from '../../actions';
-import {Modal, Divider, Grid, Segment, Message, Button, Form} from 'semantic-ui-react'
+import {
+  Modal,
+  Divider,
+  Grid,
+  Segment,
+  Message,
+  Button,
+  Form
+} from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   email: '',
@@ -83,7 +91,6 @@ class Login extends Component {
               <Divider vertical>Or</Divider>
             </Segment>
             </Modal.Description>
-
           </Modal.Content>
           <Modal.Actions>
             <Message>

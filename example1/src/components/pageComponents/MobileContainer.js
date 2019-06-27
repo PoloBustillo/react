@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
+import ButtonIcon from './ButtonIcon'
 import {connect} from 'react-redux';
 import {
   setRegisterModalVisibility,
@@ -17,12 +18,6 @@ import {
   Menu
 } from 'semantic-ui-react';
 
-const getWidth = () => {
-  const isSSR = typeof window === 'undefined'
-
-  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
-}
-
 class MobileContainer extends Component {
   state = {}
 
@@ -37,7 +32,7 @@ class MobileContainer extends Component {
     return (
       <Responsive
         as={Sidebar.Pushable}
-        getWidth={getWidth}
+        getWidth={this.props.getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
       >
         <Sidebar
@@ -73,27 +68,36 @@ class MobileContainer extends Component {
                   <Icon name='sidebar' />
                 </Menu.Item>
                 <Menu.Item hidden={this.props.isLogged} position='right'>
-                  <Button
-                    as='a'
-                    inverted
-                    onClick={()=>this.props.setLoginModalVisibility(true)}>
-                    Iniciar
-                  </Button>
-                  <Button
-                    inverted
-                    as='a'
-                    onClick={()=>this.props.setRegisterModalVisibility(true)}
-                    style={{ marginLeft: '0.5em' }}>
-                    Crear
-                  </Button>
+                  <ButtonIcon
+                     inverted={true}
+                     animated='vertical'
+                     textInit='Iniciar'
+                     iconFinal='user times'
+                     onClick={()=>this.props.setLoginModalVisibility(true)}/>
+                  <ButtonIcon
+                     inverted={true}
+                     animated='vertical'
+                     textInit='Crear'
+                     iconFinal='user plus'
+                     onClick={()=>this.props.setRegisterModalVisibility(true)}/>
                 </Menu.Item>
                 <Menu.Item hidden={!this.props.isLogged} position='right'>
-                  <Button
-                    as='a'
-                    inverted
-                    onClick={()=>this.props.logoutUserEmail()}>
-                    Salir
-                  </Button>
+                  <ButtonIcon
+                    inverted={true}
+                    animated='vertical'
+                    iconInit='user'
+                    iconFinal='user'/>
+                    <ButtonIcon
+                      inverted={true}
+                      animated='vertical'
+                      iconInit='shopping cart'
+                      iconFinal='cart plus'/>
+                   <ButtonIcon
+                      inverted={true}
+                      animated='vertical'
+                      iconInit='power off'
+                      iconFinal='power off'
+                      onClick={()=>this.props.logoutUserEmail()}/>
                 </Menu.Item>
               </Menu>
             </Container>

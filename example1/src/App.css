@@ -73,5 +73,7 @@
 .header {
   font-family: 'Mightype';
   font-size: 70px;
-
+}
+.segment{
+  background-color:rgb(247, 247, 247)!important;
 }

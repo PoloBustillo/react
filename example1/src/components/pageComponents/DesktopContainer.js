@@ -1,25 +1,24 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import _ from 'lodash';
+import {menuMainDesktop} from '../../utils/Constants';
+import HomePageHeading from './HomePageHeading';
+import ButtonIcon from './ButtonIcon';
 import {
   setRegisterModalVisibility,
   setLoginModalVisibility,
   logoutUserEmail
 } from '../../actions';
-import HomePageHeading from './HomePageHeading';
 import {
   Button,
   Container,
   Responsive,
   Segment,
   Menu,
-  Visibility,
+  Visibility
 } from 'semantic-ui-react';
 
-const getWidth = () => {
-  const isSSR = typeof window === 'undefined'
-  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
-}
 
 class DesktopContainer extends Component {
   state={};
@@ -31,7 +30,7 @@ class DesktopContainer extends Component {
     const { fixed } = this.state
 
     return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+      <Responsive getWidth={this.props.getWidth} minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
@@ -51,35 +50,46 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item as='a'>
-                  Home
-                </Menu.Item>
-                <Menu.Item as='a'>Puntos de Entrega</Menu.Item>
-                <Menu.Item as='a'>Catalogo</Menu.Item>
-                <Menu.Item as='a'>Cursos</Menu.Item>
+                {_.map(menuMainDesktop,(menuItem)=>{
+                    return(
+                      <Menu.Item
+                      as='a'
+                      href={menuItem.link}>
+                        {menuItem.title}
+                      </Menu.Item>
+                  )
+                })}
                 <Menu.Item hidden={this.props.isLogged} position='right'>
-                  <Button
-                    as='a'
-                    inverted={!fixed}
-                    onClick={()=>this.props.setLoginModalVisibility(true)}>
-                    Iniciar Sesion
-                  </Button>
-                  <Button
-                    as='a'
-                    onClick={()=>this.props.setRegisterModalVisibility(true)}
-                    inverted={!fixed}
-                    primary={fixed}
-                    style={{ marginLeft: '0.5em' }}>
-                    Crear Cuenta
-                  </Button>
+                <ButtonIcon
+                   inverted={true}
+                   animated='vertical'
+                   textInit='Iniciar Sesion'
+                   iconFinal='user times'
+                   onClick={()=>this.props.setLoginModalVisibility(true)}/>
+                <ButtonIcon
+                   inverted={true}
+                   animated='vertical'
+                   textInit='Crear Cuenta'
+                   iconFinal='user plus'
+                   onClick={()=>this.props.setRegisterModalVisibility(true)}/>
                 </Menu.Item>
                 <Menu.Item hidden={!this.props.isLogged} position='right'>
-                  <Button
-                    as='a'
-                    inverted={!fixed}
-                    onClick={()=>this.props.logoutUserEmail()}>
-                    Salir
-                  </Button>
+                 <ButtonIcon
+                   inverted={!fixed}
+                   animated='vertical'
+                   iconInit='user'
+                   iconFinal='user'/>
+                   <ButtonIcon
+                     inverted={!fixed}
+                     animated='vertical'
+                     iconInit='shopping cart'
+                     iconFinal='cart plus'/>
+                  <ButtonIcon
+                     inverted={!fixed}
+                     animated='vertical'
+                     iconInit='power off'
+                     iconFinal='power off'
+                     onClick={()=>this.props.logoutUserEmail()}/>
                 </Menu.Item>
               </Container>
             </Menu>
