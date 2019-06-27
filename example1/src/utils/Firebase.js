@@ -14,7 +14,10 @@ export const errorCodes = {
   'auth/invalid-email': 'Email no es valido.',
   'auth/operation-not-allowed': 'Email esta deshabilitado.',
   'auth/weak-password': 'Password debe tener al menos 6 letras.',
-  'auth/network-request-failed': 'Por favor intentelo de nuevo, problemas de conexion.'
+  'auth/network-request-failed': 'Por favor intentelo de nuevo, problemas de conexion.',
+  'auth/user-disabled': 'Usuario no esta habilitado',
+  'auth/user-not-found': 'Usuario no encontrado',
+  'auth/wrong-password': 'Password no coincide'
 };
 
 class Firebase {

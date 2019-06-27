@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {setRegisterModalVisibility, setLoginModalVisibility} from '../../actions';
+import {
+  setRegisterModalVisibility,
+  setLoginModalVisibility,
+  logoutUserEmail
+} from '../../actions';
 import HomePageHeading from './HomePageHeading';
 import {
   Button,
@@ -50,6 +54,7 @@ class MobileContainer extends Component {
           <Menu.Item as='a'>Puntos de Entrega</Menu.Item>
           <Menu.Item as='a'>Catalogo</Menu.Item>
           <Menu.Item as='a'>Cursos</Menu.Item>
+          <Menu.Item hidden={!this.props.isLogged} as='a' onClick={()=>this.props.logoutUserEmail()}>Salir</Menu.Item>
           <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.setLoginModalVisibility(true)}>Acceder</Menu.Item>
           <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.setRegisterModalVisibility(true)}>Crear Cuenta</Menu.Item>
         </Sidebar>
@@ -85,7 +90,8 @@ class MobileContainer extends Component {
                 <Menu.Item hidden={!this.props.isLogged} position='right'>
                   <Button
                     as='a'
-                    inverted>
+                    inverted
+                    onClick={()=>this.props.logoutUserEmail()}>
                     Salir
                   </Button>
                 </Menu.Item>
@@ -111,7 +117,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   setRegisterModalVisibility,
-  setLoginModalVisibility
+  setLoginModalVisibility,
+  logoutUserEmail
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobileContainer);

@@ -3,9 +3,15 @@ import { SET_MODAL_VISIBILITY_REGISTER,
   CREATE_NEW_USER_EMAIL_SUCCESS,
   CREATE_NEW_USER_EMAIL_STARTED,
   CREATE_NEW_USER_EMAIL_FAILURE,
+  LOGIN_USER_EMAIL_SUCCESS,
+  LOGIN_USER_EMAIL_STARTED,
+  LOGIN_USER_EMAIL_FAILURE,
+  LOGOUT_USER_SUCCESS,
+  LOGOUT_USER_STARTED,
   SET_MODAL_VISIBILITY_EMAIL,
   USER_PROFILE_SUCCESS
 } from './types';
+
 import {errorCodes} from '../utils/Firebase';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -46,18 +52,15 @@ export const createNewUserEmail =  (username,email,password)=> {
 
 const createNewUserSucces = authUser => ({
   type: CREATE_NEW_USER_EMAIL_SUCCESS,
-  spinner:false,
   payload: authUser
 });
 
 const createNewUserStarted = () => ({
-  type: CREATE_NEW_USER_EMAIL_STARTED,
-  spinner:true
+  type: CREATE_NEW_USER_EMAIL_STARTED
 });
 
 const createNewUserFailure = error => ({
   type: CREATE_NEW_USER_EMAIL_FAILURE,
-  spinner:true,
   errorCode: error
 });
 
@@ -80,4 +83,57 @@ const userProfileSuccess = (authUser, isAdmin)=> ({
   type: USER_PROFILE_SUCCESS,
   payload: authUser,
   isAdmin: isAdmin
+});
+
+
+export const loginUserEmail =  (email,password)=> {
+  return async dispatch => {
+    dispatch(loginUserStarted());
+
+    const result = await firebase.auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(error => {dispatch(loginUserFailure(errorCodes[error.code]))});
+
+    if(result!=null){
+      dispatch(loginUserSuccess(result));
+    }
+  };
+};
+
+const loginUserSuccess = authUser => ({
+  type: LOGIN_USER_EMAIL_SUCCESS,
+  payload: authUser
+});
+
+const loginUserStarted = () => ({
+  type: LOGIN_USER_EMAIL_STARTED
+});
+
+const loginUserFailure = error => ({
+  type: LOGIN_USER_EMAIL_FAILURE,
+  errorCode: error
+});
+
+export const logoutUserEmail =  (email,password)=> {
+  return async dispatch => {
+    dispatch(logoutUserStarted());
+    await firebase.auth().signOut();
+    firebase.auth().onAuthStateChanged((user) =>{
+      if(user===null)
+        dispatch(logoutUserSuccess());
+    });
+
+
+  };
+};
+
+const logoutUserSuccess = () => ({
+  type: LOGOUT_USER_SUCCESS,
+  spinner:false,
+  logout: true
+});
+
+const logoutUserStarted = () => ({
+  type: LOGOUT_USER_STARTED,
+  spinner:true
 });

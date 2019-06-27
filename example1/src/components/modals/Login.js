@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import FormSocials from './FormSocials';
-import {setLoginModalVisibility, setRegisterModalVisibility} from '../../actions';
+import {
+  setLoginModalVisibility,
+  setRegisterModalVisibility,
+  loginUserEmail
+} from '../../actions';
 import {Modal, Divider, Grid, Segment, Message, Button, Form} from 'semantic-ui-react'
 
 const INITIAL_STATE = {
@@ -18,8 +22,10 @@ class Login extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  onSubmit = event => {
+  onSubmit = (event, email, password) => {
     event.preventDefault();
+    this.setState({...INITIAL_STATE});
+    this.props.loginUserEmail(email,password)
   }
 
   render() {
@@ -44,7 +50,7 @@ class Login extends Component {
             <Segment placeholder>
               <Grid columns={2}>
                 <Grid.Column verticalAlign='middle'>
-                  <Form onSubmit={() => this.props.onSubmit(email, password)}>
+                  <Form onSubmit={(event) => this.onSubmit(event, email, password)}>
                     <Form.Input
                       name='email'
                       value={this.state.email}
@@ -62,14 +68,20 @@ class Login extends Component {
                       iconPosition='left'
                       label='Password'
                       type='password' />
-                    <Button content='Acceder' disabled={isInvalid} primary/>
+                      <Message
+                        hidden={this.props.errorMsg==''}
+                        header='Error'
+                        content={this.props.errorMsg}
+                      />
+                    <Button content='Acceder'
+                    loading={this.props.spinner}
+                    disabled={isInvalid} primary/>
                   </Form>
                 </Grid.Column>
                 <FormSocials/>
               </Grid>
               <Divider vertical>Or</Divider>
             </Segment>
-
             </Modal.Description>
 
           </Modal.Content>
@@ -90,12 +102,17 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {open:state.modalsReducer.openLogin}
+  return {
+    open:state.modalsReducer.openLogin,
+    spinner:state.modalsReducer.spinner,
+    errorMsg:state.modalsReducer.errorCode
+  }
 }
 
 const mapDispatchToProps = {
   setLoginModalVisibility,
-  setRegisterModalVisibility
+  setRegisterModalVisibility,
+  loginUserEmail
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -4,6 +4,9 @@ import {
   CREATE_NEW_USER_EMAIL_STARTED,
   CREATE_NEW_USER_EMAIL_FAILURE,
   CREATE_NEW_USER_EMAIL_SUCCESS,
+  LOGIN_USER_EMAIL_SUCCESS,
+  LOGIN_USER_EMAIL_STARTED,
+  LOGIN_USER_EMAIL_FAILURE,
   SET_MODAL_VISIBILITY_EMAIL
 } from '../actions/types';
 
@@ -35,20 +38,22 @@ function modalsReducer(state = INITIAL_STATE, action) {
         openEmailVerification: action.isOpen
       }
     }
-    case CREATE_NEW_USER_EMAIL_STARTED: {
+    case CREATE_NEW_USER_EMAIL_STARTED:
+    case LOGIN_USER_EMAIL_STARTED: {
       return {
         ...state,
-        spinner: action.spinner
+        spinner: true
       }
     }
-    case CREATE_NEW_USER_EMAIL_FAILURE: {
+    case CREATE_NEW_USER_EMAIL_FAILURE:
+    case LOGIN_USER_EMAIL_FAILURE: {
       return {
         ...state,
         errorCode: action.errorCode,
         spinner: false
       }
     }
-    case CREATE_NEW_USER_EMAIL_SUCCESS: {
+    case CREATE_NEW_USER_EMAIL_SUCCESS:{
       return {
         ...state,
         errorCode: '',
@@ -56,6 +61,14 @@ function modalsReducer(state = INITIAL_STATE, action) {
         openRegister:false,
         openEmailVerification:true
         }
+    }
+    case LOGIN_USER_EMAIL_SUCCESS: {
+      return {
+        ...state,
+        errorCode: '',
+        spinner: false,
+        openLogin:false,
+      }
     }
     default:
       return state;

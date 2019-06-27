@@ -1,7 +1,11 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {setRegisterModalVisibility, setLoginModalVisibility} from '../../actions';
+import {
+  setRegisterModalVisibility,
+  setLoginModalVisibility,
+  logoutUserEmail
+} from '../../actions';
 import HomePageHeading from './HomePageHeading';
 import {
   Button,
@@ -72,7 +76,8 @@ class DesktopContainer extends Component {
                 <Menu.Item hidden={!this.props.isLogged} position='right'>
                   <Button
                     as='a'
-                    inverted={!fixed}>
+                    inverted={!fixed}
+                    onClick={()=>this.props.logoutUserEmail()}>
                     Salir
                   </Button>
                 </Menu.Item>
@@ -98,7 +103,8 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = {
   setRegisterModalVisibility,
-  setLoginModalVisibility
+  setLoginModalVisibility,
+  logoutUserEmail
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesktopContainer);

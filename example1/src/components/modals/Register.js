@@ -22,6 +22,7 @@ class Register extends Component {
 
   onSubmit = (event, username, email, password) => {
     event.preventDefault();
+    this.setState({...INITIAL_STATE});
     this.props.createNewUserEmail(username,email,password)
 
   }
