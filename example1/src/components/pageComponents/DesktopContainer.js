@@ -11,7 +11,6 @@ import {
   logoutUserEmail
 } from '../../actions';
 import {
-  Button,
   Container,
   Responsive,
   Segment,
@@ -28,7 +27,6 @@ class DesktopContainer extends Component {
   render() {
     const { children } = this.props
     const { fixed } = this.state
-
     return (
       <Responsive getWidth={this.props.getWidth} minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility
@@ -77,7 +75,7 @@ class DesktopContainer extends Component {
                  <ButtonIcon
                    inverted={!fixed}
                    animated='vertical'
-                   iconInit='user'
+                   textInit={this.props.userName}
                    iconFinal='user'/>
                    <ButtonIcon
                      inverted={!fixed}
@@ -107,9 +105,11 @@ DesktopContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const mapStateToProps = (state, props) => ({
-   ...state
-})
+const mapStateToProps = (state, props) => {
+  return {
+    userName:state.sessionReducer.userName,
+  }
+}
 
 const mapDispatchToProps = {
   setRegisterModalVisibility,

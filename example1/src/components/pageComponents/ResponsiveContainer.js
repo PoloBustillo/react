@@ -31,13 +31,17 @@ class ResponsiveContainer extends React.Component{
       <div>
        <DesktopContainer {...this.props} getWidth={getWidth}>
           {this.props.children}
+          <Login/>
+          <Register/>
+          <EmailNotice/>
         </DesktopContainer>
        <MobileContainer {...this.props} getWidth={getWidth}>
           {this.props.children}
+          <Login mobile/>
+          <Register mobile/>
+          <EmailNotice mobile/>
         </MobileContainer>
-       <Login/>
-       <Register/>
-       <EmailNotice/>
+
      </div>
     );
   }

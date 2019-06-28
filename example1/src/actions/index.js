@@ -6,6 +6,9 @@ import { SET_MODAL_VISIBILITY_REGISTER,
   LOGIN_USER_EMAIL_SUCCESS,
   LOGIN_USER_EMAIL_STARTED,
   LOGIN_USER_EMAIL_FAILURE,
+  LOGIN_USER_FB_SUCCESS,
+  LOGIN_USER_FB_STARTED,
+  LOGIN_USER_FB_FAILURE,
   LOGOUT_USER_SUCCESS,
   LOGOUT_USER_STARTED,
   SET_MODAL_VISIBILITY_EMAIL,
@@ -136,4 +139,44 @@ const logoutUserSuccess = () => ({
 const logoutUserStarted = () => ({
   type: LOGOUT_USER_STARTED,
   spinner:true
+});
+
+
+export const loginUserFB =  ()=> {
+  return async dispatch => {
+    dispatch(loginUserFBStarted());
+    const provider = new firebase.auth.FacebookAuthProvider();
+    try {
+      await firebase.auth().signInWithPopup(provider);
+    } catch (err) {
+      console.log(err);
+      if (err.email
+        && err.credential
+        && err.code === 'auth/account-exists-with-different-credential') {
+        const providers = await firebase.auth().fetchSignInMethodsForEmail(err.email)
+        console.log(provider);
+        const result = await firebase.auth()
+          .signInWithEmailAndPassword(err.email, '123456')
+          .catch(error => {dispatch(loginUserFailure(errorCodes[error.code]))});
+        console.log(result);
+        const linkresult = await result.user.linkWithCredential(err.credential)
+              .catch(error => {dispatch(loginUserFailure(errorCodes[error.code]))});
+        console.log(linkresult);
+      }
+    }
+  }
+};
+
+const loginUserFBSuccess = authUser => ({
+  type: LOGIN_USER_FB_SUCCESS,
+  payload: authUser
+});
+
+const loginUserFBStarted = () => ({
+  type: LOGIN_USER_FB_STARTED
+});
+
+const loginUserFBFailure = error => ({
+  type: LOGIN_USER_FB_FAILURE,
+  errorCode: error
 });

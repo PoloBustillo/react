@@ -7,12 +7,14 @@ class EmailNotice extends Component {
 
 
   render() {
+    const classes = this.props.mobile?'mobile scrolling':'scrolling'
     return (
       <Modal
         open={this.props.open}
         onClose={()=>this.props.setEmailModalVisibility(false)}
         basic
         size='small'
+        className={classes}
       >
         <Header icon='mail' content='Un Email se ha enviado' />
         <Modal.Content>

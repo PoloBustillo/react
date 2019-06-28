@@ -7,7 +7,10 @@ import {
   LOGIN_USER_EMAIL_SUCCESS,
   LOGIN_USER_EMAIL_STARTED,
   LOGIN_USER_EMAIL_FAILURE,
-  SET_MODAL_VISIBILITY_EMAIL
+  SET_MODAL_VISIBILITY_EMAIL,
+  LOGIN_USER_FB_STARTED,
+  LOGIN_USER_FB_SUCCESS,
+  LOGIN_USER_FB_FAILURE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -39,6 +42,7 @@ function modalsReducer(state = INITIAL_STATE, action) {
       }
     }
     case CREATE_NEW_USER_EMAIL_STARTED:
+    case LOGIN_USER_FB_STARTED:
     case LOGIN_USER_EMAIL_STARTED: {
       return {
         ...state,
@@ -46,7 +50,8 @@ function modalsReducer(state = INITIAL_STATE, action) {
       }
     }
     case CREATE_NEW_USER_EMAIL_FAILURE:
-    case LOGIN_USER_EMAIL_FAILURE: {
+    case LOGIN_USER_EMAIL_FAILURE:
+    case LOGIN_USER_FB_FAILURE: {
       return {
         ...state,
         errorCode: action.errorCode,
@@ -62,6 +67,7 @@ function modalsReducer(state = INITIAL_STATE, action) {
         openEmailVerification:true
         }
     }
+    case LOGIN_USER_FB_SUCCESS:
     case LOGIN_USER_EMAIL_SUCCESS: {
       return {
         ...state,

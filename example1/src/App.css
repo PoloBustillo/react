@@ -59,14 +59,16 @@
     url(./fonts/Mightype/Mightype Script.otf) format('opentype');
 }
 
+.ui.page.modals.dimmer .modal{
+  margin-top:15%!important
+}
+.ui.page.modals.dimmer .modal.mobile{
+  margin-top:15%!important
+}
 .modal{
-  margin-top: -200px !important;
-  height: auto;
+  height: fit-content;
 }
 
-.modalRegister{
-  margin-top: -280px !important;
-}
 .inputContainer{
   margin-bottom: 30px;
 }

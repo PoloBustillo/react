@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {setRegisterModalVisibility,createNewUserEmail} from '../../actions';
+import {setRegisterModalVisibility,createNewUserEmail,loginUserFB} from '../../actions';
 import FormSocials from './FormSocials';
-import {Modal, Divider, Grid, Segment, Form, Button, Message, Image} from 'semantic-ui-react'
+import {Modal, Divider, Grid, Segment, Form, Button, Message} from 'semantic-ui-react'
 
 const INITIAL_STATE = {
   username: '',
@@ -40,16 +40,16 @@ class Register extends Component {
           passwordOne === '' ||
           email === '' ||
           username === '';
-
+    const classes = this.props.mobile?'mobile scrolling':'scrolling'
     return (
       <div>
         <Modal
           dimmer={'blurring'}
           open={this.props.open}
           onClose={()=>this.props.setRegisterModalVisibility(false)}
-          className='modalRegister'>
+          className={classes}>
           <Modal.Header>Crear cuenta nueva</Modal.Header>
-          <Modal.Content scrolling>
+          <Modal.Content>
             <Modal.Description>
             <Segment placeholder>
               <Grid columns={2}>
@@ -89,7 +89,7 @@ class Register extends Component {
                       type='password'
                       placeholder='Confirma tu password'/>
                       <Message
-                        hidden={this.props.errorMsg==''}
+                        hidden={this.props.errorMsg===''}
                         header='Error'
                         content={this.props.errorMsg}
                       />
@@ -100,7 +100,7 @@ class Register extends Component {
                       primary/>
                   </Form>
                 </Grid.Column>
-                <FormSocials/>
+                <FormSocials facebookLogin={this.props.loginUserFB}/>
               </Grid>
               <Divider vertical>Or</Divider>
             </Segment>
@@ -120,7 +120,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   setRegisterModalVisibility,
-  createNewUserEmail
+  createNewUserEmail,
+  loginUserFB
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

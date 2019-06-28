@@ -6,7 +6,7 @@ export default class FormSocials extends React.Component{
   render(){
     return(
       <Grid.Column verticalAlign='middle' stretched>
-        <Button color='facebook'>
+        <Button onClick={()=>this.props.facebookLogin()}color='facebook'>
            <Icon name='facebook' /> Facebook
        </Button>
        <br/>

@@ -4,7 +4,8 @@ import FormSocials from './FormSocials';
 import {
   setLoginModalVisibility,
   setRegisterModalVisibility,
-  loginUserEmail
+  loginUserEmail,
+  loginUserFB
 } from '../../actions';
 import {
   Modal,
@@ -18,8 +19,7 @@ import {
 
 const INITIAL_STATE = {
   email: '',
-  password: '',
-  error: null
+  password: ''
 };
 
 class Login extends Component {
@@ -39,19 +39,22 @@ class Login extends Component {
   render() {
     const {
       email,
-      password,
-      error
+      password
     } = this.state;
 
     const isInvalid = password=== '' ||
           email === '';
+
+    const classes = this.props.mobile?'mobile scrolling':'scrolling';
+
     return (
       <div>
         <Modal
           size={'mini'}
           dimmer={'blurring'}
           open={this.props.open}
-          onClose={()=>this.props.setLoginModalVisibility(false)}>
+          onClose={()=>this.props.setLoginModalVisibility(false)}
+          className={classes}>
           <Modal.Header>Por favor introduce tus credenciales</Modal.Header>
           <Modal.Content>
             <Modal.Description>
@@ -77,7 +80,7 @@ class Login extends Component {
                       label='Password'
                       type='password' />
                       <Message
-                        hidden={this.props.errorMsg==''}
+                        hidden={this.props.errorMsg===''}
                         header='Error'
                         content={this.props.errorMsg}
                       />
@@ -86,7 +89,7 @@ class Login extends Component {
                     disabled={isInvalid} primary/>
                   </Form>
                 </Grid.Column>
-                <FormSocials/>
+                <FormSocials facebookLogin={this.props.loginUserFB}/>
               </Grid>
               <Divider vertical>Or</Divider>
             </Segment>
@@ -119,7 +122,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setLoginModalVisibility,
   setRegisterModalVisibility,
-  loginUserEmail
+  loginUserEmail,
+  loginUserFB
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -17,7 +17,9 @@ export const errorCodes = {
   'auth/network-request-failed': 'Por favor intentelo de nuevo, problemas de conexion.',
   'auth/user-disabled': 'Usuario no esta habilitado',
   'auth/user-not-found': 'Usuario no encontrado',
-  'auth/wrong-password': 'Password no coincide'
+  'auth/wrong-password': 'Password no coincide',
+  'auth/popup-closed-by-user': 'Por favor no cierres la ventana de FB',
+  'auth/popup-blocked': 'El popup de FB esta bloqueado por tu browser'
 };
 
 class Firebase {

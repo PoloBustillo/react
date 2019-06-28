@@ -9,7 +9,6 @@ import {
 } from '../../actions';
 import HomePageHeading from './HomePageHeading';
 import {
-  Button,
   Icon,
   Container,
   Responsive,
@@ -85,7 +84,7 @@ class MobileContainer extends Component {
                   <ButtonIcon
                     inverted={true}
                     animated='vertical'
-                    iconInit='user'
+                    textInit={this.props.userName}
                     iconFinal='user'/>
                     <ButtonIcon
                       inverted={true}
@@ -115,9 +114,12 @@ MobileContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const mapStateToProps = (state, props) => ({
-   ...state
-})
+
+const mapStateToProps = (state, props) => {
+  return {
+    userName:state.sessionReducer.userName,
+  }
+}
 
 const mapDispatchToProps = {
   setRegisterModalVisibility,
