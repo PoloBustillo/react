@@ -1,17 +1,4 @@
-import {
-  SET_MODAL_VISIBILITY_REGISTER,
-  SET_MODAL_VISIBILITY_LOGIN,
-  CREATE_NEW_USER_EMAIL_STARTED,
-  CREATE_NEW_USER_EMAIL_FAILURE,
-  CREATE_NEW_USER_EMAIL_SUCCESS,
-  LOGIN_USER_EMAIL_SUCCESS,
-  LOGIN_USER_EMAIL_STARTED,
-  LOGIN_USER_EMAIL_FAILURE,
-  SET_MODAL_VISIBILITY_EMAIL,
-  LOGIN_USER_FB_STARTED,
-  LOGIN_USER_FB_SUCCESS,
-  LOGIN_USER_FB_FAILURE
-} from '../actions/types';
+import * as ActionTypes from '../actions/types';
 
 const INITIAL_STATE = {
   openRegister: false,
@@ -23,57 +10,59 @@ const INITIAL_STATE = {
 
 function modalsReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case SET_MODAL_VISIBILITY_REGISTER: {
+    case ActionTypes.SET_MODAL_VISIBILITY_REGISTER: {
       return {
         ...state,
         openRegister: action.isOpen
       }
     }
-    case SET_MODAL_VISIBILITY_LOGIN: {
+    case ActionTypes.SET_MODAL_VISIBILITY_LOGIN: {
       return {
         ...state,
         openLogin: action.isOpen
       }
     }
-    case SET_MODAL_VISIBILITY_EMAIL: {
+    case ActionTypes.SET_MODAL_VISIBILITY_EMAIL: {
       return {
         ...state,
         openEmailVerification: action.isOpen
       }
     }
-    case CREATE_NEW_USER_EMAIL_STARTED:
-    case LOGIN_USER_FB_STARTED:
-    case LOGIN_USER_EMAIL_STARTED: {
+    case ActionTypes.CREATE_NEW_USER_EMAIL_STARTED:
+    case ActionTypes.LOGIN_USER_FB_STARTED:
+    case ActionTypes.LOGIN_USER_EMAIL_STARTED: {
       return {
         ...state,
         spinner: true
       }
     }
-    case CREATE_NEW_USER_EMAIL_FAILURE:
-    case LOGIN_USER_EMAIL_FAILURE:
-    case LOGIN_USER_FB_FAILURE: {
+    case ActionTypes.CREATE_NEW_USER_EMAIL_FAILURE:
+    case ActionTypes.LOGIN_USER_EMAIL_FAILURE:
+    case ActionTypes.LOGIN_USER_FB_FAILURE: {
       return {
         ...state,
         errorCode: action.errorCode,
         spinner: false
       }
     }
-    case CREATE_NEW_USER_EMAIL_SUCCESS:{
+    case ActionTypes.CREATE_NEW_USER_EMAIL_SUCCESS:{
       return {
         ...state,
         errorCode: '',
         spinner: false,
         openRegister:false,
+        openLogin:false,
         openEmailVerification:true
         }
     }
-    case LOGIN_USER_FB_SUCCESS:
-    case LOGIN_USER_EMAIL_SUCCESS: {
+    case ActionTypes.LOGIN_USER_FB_SUCCESS:
+    case ActionTypes.LOGIN_USER_EMAIL_SUCCESS: {
       return {
         ...state,
         errorCode: '',
         spinner: false,
         openLogin:false,
+        openRegister:false
       }
     }
     default:

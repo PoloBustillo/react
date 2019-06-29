@@ -5,11 +5,7 @@ import _ from 'lodash';
 import {menuMainDesktop} from '../../utils/Constants';
 import HomePageHeading from './HomePageHeading';
 import ButtonIcon from './ButtonIcon';
-import {
-  setRegisterModalVisibility,
-  setLoginModalVisibility,
-  logoutUserEmail
-} from '../../actions';
+import * as actionCreators from '../../actions';
 import {
   Container,
   Responsive,
@@ -112,9 +108,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = {
-  setRegisterModalVisibility,
-  setLoginModalVisibility,
-  logoutUserEmail
+  ...actionCreators
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DesktopContainer);

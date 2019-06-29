@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import FormSocials from './FormSocials';
-import {
-  setLoginModalVisibility,
-  setRegisterModalVisibility,
-  loginUserEmail,
-  loginUserFB
-} from '../../actions';
+import * as actionCreators from '../../actions';
 import {
   Modal,
   Divider,
@@ -120,10 +115,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  setLoginModalVisibility,
-  setRegisterModalVisibility,
-  loginUserEmail,
-  loginUserFB
+  ...actionCreators
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

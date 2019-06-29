@@ -2,11 +2,7 @@ import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import ButtonIcon from './ButtonIcon'
 import {connect} from 'react-redux';
-import {
-  setRegisterModalVisibility,
-  setLoginModalVisibility,
-  logoutUserEmail
-} from '../../actions';
+import * as actionCreators from '../../actions';
 import HomePageHeading from './HomePageHeading';
 import {
   Icon,
@@ -49,8 +45,8 @@ class MobileContainer extends Component {
           <Menu.Item as='a'>Catalogo</Menu.Item>
           <Menu.Item as='a'>Cursos</Menu.Item>
           <Menu.Item hidden={!this.props.isLogged} as='a' onClick={()=>this.props.logoutUserEmail()}>Salir</Menu.Item>
-          <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.setLoginModalVisibility(true)}>Acceder</Menu.Item>
-          <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.setRegisterModalVisibility(true)}>Crear Cuenta</Menu.Item>
+          <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.actionCreators.setLoginModalVisibility(true)}>Acceder</Menu.Item>
+          <Menu.Item hidden={this.props.isLogged} as='a' onClick={()=>this.props.actionCreators.setRegisterModalVisibility(true)}>Crear Cuenta</Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -122,9 +118,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = {
-  setRegisterModalVisibility,
-  setLoginModalVisibility,
-  logoutUserEmail
+  ...actionCreators
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MobileContainer);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {setEmailModalVisibility} from '../../actions';
+import * as actionCreators from '../../actions';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
 
 class EmailNotice extends Component {
@@ -11,7 +11,7 @@ class EmailNotice extends Component {
     return (
       <Modal
         open={this.props.open}
-        onClose={()=>this.props.setEmailModalVisibility(false)}
+        onClose={()=>this.props.actionCreators.setEmailModalVisibility(false)}
         basic
         size='small'
         className={classes}
@@ -21,7 +21,7 @@ class EmailNotice extends Component {
           <h3> Por favor para acceder a las compras y apartados, valida tu email!!</h3>
         </Modal.Content>
         <Modal.Actions>
-          <Button color='green' onClick={()=>this.props.setEmailModalVisibility(false)} inverted>
+          <Button color='green' onClick={()=>this.props.actionCreators.setEmailModalVisibility(false)} inverted>
             <Icon name='checkmark' /> Entendido
           </Button>
         </Modal.Actions>
@@ -35,7 +35,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  setEmailModalVisibility
+  actionCreators
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmailNotice);

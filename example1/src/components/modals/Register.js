@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {setRegisterModalVisibility,createNewUserEmail,loginUserFB} from '../../actions';
+import * as actionCreators from '../../actions';
 import FormSocials from './FormSocials';
 import {Modal, Divider, Grid, Segment, Form, Button, Message} from 'semantic-ui-react'
 
@@ -119,9 +119,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  setRegisterModalVisibility,
-  createNewUserEmail,
-  loginUserFB
+  ...actionCreators
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

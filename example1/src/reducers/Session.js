@@ -1,12 +1,4 @@
-import {
-  CREATE_NEW_USER_EMAIL_SUCCESS,
-  USER_PROFILE_SUCCESS,
-  LOGIN_USER_EMAIL_SUCCESS,
-  LOGOUT_USER_SUCCESS,
-  LOGIN_USER_FB_SUCCESS,
-  LOGIN_USER_FB_STARTED,
-  LOGIN_USER_FB_FAILURE
-} from '../actions/types';
+import * as ActionTypes from '../actions/types';
 const INITIAL_STATE = {
   authUser: null,
   userName:'',
@@ -17,8 +9,8 @@ const INITIAL_STATE = {
 
 function sessionReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case CREATE_NEW_USER_EMAIL_SUCCESS:
-    case LOGIN_USER_EMAIL_SUCCESS: {
+    case ActionTypes.CREATE_NEW_USER_EMAIL_SUCCESS:
+    case ActionTypes.LOGIN_USER_EMAIL_SUCCESS: {
       return {
         ...state,
         authUser:action.payload.user,
@@ -26,8 +18,8 @@ function sessionReducer(state = INITIAL_STATE, action) {
         email:action.payload.user.email
         }
     }
-    case USER_PROFILE_SUCCESS: {
-      const username = action.payload.displayName!==null?action.payload.displayName:undefined
+    case ActionTypes.USER_PROFILE_SUCCESS: {
+      const username = state.userName!==''?state.userName:action.payload.displayName;
       return {
         ...state,
         authUser:action.payload,
@@ -36,7 +28,7 @@ function sessionReducer(state = INITIAL_STATE, action) {
         email:action.payload.email
         }
     }
-    case LOGOUT_USER_SUCCESS: {
+    case ActionTypes.LOGOUT_USER_SUCCESS: {
       return {
         ...state,
         authUser:null,
