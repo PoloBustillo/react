@@ -22,15 +22,16 @@ function sessionReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         authUser:action.payload.user,
-        userName:action.payload.displayName,
+        userName:action.username,
         email:action.payload.user.email
         }
     }
     case USER_PROFILE_SUCCESS: {
+      const username = action.payload.displayName!==null?action.payload.displayName:undefined
       return {
         ...state,
         authUser:action.payload,
-        userName:action.payload.displayName,
+        userName:username,
         isAdmin:action.isAdmin,
         email:action.payload.email
         }

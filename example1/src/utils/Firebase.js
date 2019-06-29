@@ -19,7 +19,8 @@ export const errorCodes = {
   'auth/user-not-found': 'Usuario no encontrado',
   'auth/wrong-password': 'Password no coincide',
   'auth/popup-closed-by-user': 'Por favor no cierres la ventana de FB',
-  'auth/popup-blocked': 'El popup de FB esta bloqueado por tu browser'
+  'auth/popup-blocked': 'El popup de FB esta bloqueado por tu browser',
+  'auth/cancelled-popup-request': 'El popup fue cerrado antes de acceder'
 };
 
 class Firebase {

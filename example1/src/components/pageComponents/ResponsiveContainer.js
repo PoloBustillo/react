@@ -2,7 +2,6 @@ import React from 'react';
 import DesktopContainer from './DesktopContainer';
 import MobileContainer from './MobileContainer';
 import {connect} from 'react-redux';
-import {loadUserProfile} from '../../actions'
 import Login from '../modals/Login';
 import Register from '../modals/Register';
 import EmailNotice from '../modals/EmailNotice'
@@ -16,15 +15,6 @@ const getWidth = () => {
 }
 
 class ResponsiveContainer extends React.Component{
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) =>{
-      if(user){
-          user.getIdTokenResult(true)
-          this.props.dispatch(loadUserProfile(user));
-      }
-    });
-  }
 
   render(){
     return(

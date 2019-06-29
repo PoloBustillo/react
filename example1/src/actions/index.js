@@ -48,14 +48,15 @@ export const createNewUserEmail =  (username,email,password)=> {
           photoURL: ""
         });
        result.user.sendEmailVerification();
-       dispatch(createNewUserSucces(result));
+       dispatch(createNewUserSucces(result, username));
     }
   };
 };
 
-const createNewUserSucces = authUser => ({
+const createNewUserSucces = (authUser, username) => ({
   type: CREATE_NEW_USER_EMAIL_SUCCESS,
-  payload: authUser
+  payload: authUser,
+  username: username
 });
 
 const createNewUserStarted = () => ({

@@ -60,10 +60,10 @@
 }
 
 .ui.page.modals.dimmer .modal{
-  margin-top:15%!important
+  margin-top:10%!important
 }
 .ui.page.modals.dimmer .modal.mobile{
-  margin-top:15%!important
+  margin-top:10%!important
 }
 .modal{
   height: fit-content;
